@@ -1,4 +1,4 @@
-import {Before, Then} from 'cucumber';
+import {After, Before, Then} from 'cucumber';
 import {getTestBed, TestBed} from '@angular/core/testing';
 import {AppComponent} from '../../../src/app/app.component';
 
@@ -8,13 +8,19 @@ import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angul
 // var jasmine = 'jasmine';
 // import 'zone.js/dist/zone-testing';
 
-getTestBed().initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting()
-);
+Before(() => {
+  getTestBed().initTestEnvironment(
+    BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting(),
+  );
+});
 
-Before(async function () {
-  TestBed.configureTestingModule({
+After(() => {
+  TestBed.resetTestingModule();
+});
+
+Before(async () => {
+  await TestBed.configureTestingModule({
     declarations: [
       AppComponent,
     ],
